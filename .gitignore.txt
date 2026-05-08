@@ -1,0 +1,16 @@
+# Ignorer les dépendances (très lourd)
+**/node_modules/
+**/vendor/
+
+# Ignorer les fichiers de configuration (sécurité)
+**/.env
+**/.env.local
+
+# Ignorer les dossiers de build
+**/dist/
+**/build/
+**/storage/*.key
+
+# Divers
+.DS_Store
+Thumbs.db
