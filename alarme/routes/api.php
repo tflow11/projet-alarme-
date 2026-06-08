@@ -20,6 +20,7 @@ Route::delete('/traitements/{id}', [TraitementController::class, 'destroy']);
 // Dashboard Médecin : Voir tous les RDV de ses patients
 Route::get('/contact/rdv', [ContactController::class, 'index']); 
 Route::put('/contact/rdv/{id}/valider', [ContactController::class, 'valider']);
+Route::delete('/contact/rdv/{id}', [ContactController::class, 'destroy']);
 
 Route::post('/patients', [MedecinController::class, 'storePatient']);
 Route::get('/traitements-suivi', [MedecinController::class, 'getTraitementsAvecValidations']);

@@ -70,7 +70,6 @@ class ContactController extends Controller
         }
     }
 
-    // FONCTION CORRIGÉE : PLUS D'ÉTOILES ICI
     public function rdvConfirmes()
     {
         $confirmes = Contact::where('statut', 'Confirmé')
@@ -80,6 +79,23 @@ class ContactController extends Controller
 
         return response()->json($confirmes);
     }
+
+    // NOUVELLE MÉTHODE DE SUPPRESSION
+    public function destroy($id)
+    {
+        try {
+            $rdv = Contact::findOrFail($id);
+            $rdv->delete();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Rendez-vous supprimé avec succès.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error', 
+                'message' => 'Erreur lors de la suppression du rendez-vous.'
+            ], 500);
+        }
+    }
 }
-
-

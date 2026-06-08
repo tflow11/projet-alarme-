@@ -10,7 +10,6 @@ class Traitement extends Model
         'id_patient', 'id_medicament', 'id_medecin', 
         'date_debut', 'duree',
         'heure1', 'qte1', 
-        'heure2', 'qte2', 
-        'heure3', 'qte3'
+        
     ];
 }

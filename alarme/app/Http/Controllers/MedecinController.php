@@ -43,4 +43,27 @@ class MedecinController extends Controller
     }
 
     public function index() { return response()->json(Medecin::all(), 200); }
+
+    public function register(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'nom'      => 'required|string|max:255',
+        'telephone'  =>'required|string',
+        'email'    => 'required|email|unique:medecins,email', // Table medecins
+        'password' => 'required|min:6',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    $medecin = Medecin::create([
+        'nom'      => $request->nom,
+        'telephone' => $request->telephone,
+        'email'    => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    return response()->json(['message' => 'Médecin créé avec succès', 'medecin' => $medecin], 201);
+}
 }

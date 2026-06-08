@@ -15,7 +15,6 @@ class Contact extends Model
     'telephone', 
     'date_rdv', 
     'nom_medecin', 
-    'sujet', 
     'message', 
     'statut'
 ];
