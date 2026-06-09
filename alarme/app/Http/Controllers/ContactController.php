@@ -7,13 +7,14 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
-{
+// Récupérer TOUS les rendez-vous (triés par date décroissante) → pour l'admin
+{ 
     public function index()
     {
         $rdvs = Contact::orderBy('date_rdv', 'desc')->get();
         return response()->json($rdvs);
     }
-
+// Enregistrer une nouvelle demande de RDV depuis le formulaire public (avec validation)
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -53,7 +54,7 @@ class ContactController extends Controller
             ], 500);
         }
     }
-
+// Passer un RDV de "En attente" à "Confirmé"
     public function valider($id)
     {
         try {
@@ -69,7 +70,7 @@ class ContactController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Erreur de validation.'], 500);
         }
     }
-
+// Récupérer UNIQUEMENT les RDV confirmés → affichage public
     public function rdvConfirmes()
     {
         $confirmes = Contact::where('statut', 'Confirmé')
@@ -79,8 +80,7 @@ class ContactController extends Controller
 
         return response()->json($confirmes);
     }
-
-    // NOUVELLE MÉTHODE DE SUPPRESSION
+// supprime
     public function destroy($id)
     {
         try {
